@@ -1,0 +1,45 @@
+[
+  {
+    "id": "1",
+    "messages": ["Начало"],
+    "buttons": [
+      {
+        "text": "Следующий шаг",
+        "nextStepId": "2",
+        "type": "button"
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "messages": ["Куда вы хотите перейти?"],
+    "buttons": [
+      {
+        "text": "В начало",
+        "nextStepId": "1",
+        "type": "button"
+      },
+      {
+        "text": "Следующий шаг",
+        "nextStepId": "3",
+        "type": "button"
+      }
+    ]
+  },
+  {
+    "id": "3",
+    "messages": ["Конец", "Выберите вариант!"],
+    "buttons": [
+      {
+        "text": "Предыдущий шаг",
+        "nextStepId": "2",
+        "type": "button"
+      },
+      {
+        "text": "В начало",
+        "nextStepId": "1",
+        "type": "button"
+      }
+    ]
+  }
+]
