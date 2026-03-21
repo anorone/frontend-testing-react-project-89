@@ -4,6 +4,7 @@
     "module": "esnext",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
+    "target": "esnext",
     "types": ["vitest/globals", "@testing-library/jest-dom"]
   },
   "include": ["src/", "__tests__/", "./vitest-setup.ts"]

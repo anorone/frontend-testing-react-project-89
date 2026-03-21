@@ -1,43 +1,38 @@
 [
   {
-    "id": "1",
+    "id": "welcome",
     "messages": ["Начало"],
     "buttons": [
       {
         "text": "Следующий шаг",
-        "nextStepId": "2",
+        "nextStepId": "fork",
         "type": "button"
       }
     ]
   },
   {
-    "id": "2",
+    "id": "fork",
     "messages": ["Куда вы хотите перейти?"],
     "buttons": [
       {
         "text": "В начало",
-        "nextStepId": "1",
+        "nextStepId": "welcome",
         "type": "button"
       },
       {
         "text": "Следующий шаг",
-        "nextStepId": "3",
+        "nextStepId": "farewell",
         "type": "button"
       }
     ]
   },
   {
-    "id": "3",
+    "id": "farewell",
     "messages": ["Конец", "Выберите вариант!"],
     "buttons": [
       {
         "text": "Предыдущий шаг",
-        "nextStepId": "2",
-        "type": "button"
-      },
-      {
-        "text": "В начало",
-        "nextStepId": "1",
+        "nextStepId": "fork",
         "type": "button"
       }
     ]
