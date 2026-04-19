@@ -1,11 +1,13 @@
 {
   "compilerOptions": {
     "checkJs": true,
+    "noImplicitAny": false,
     "module": "esnext",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "target": "esnext",
+    "jsx": "react-jsx",
     "types": ["vitest/globals", "@testing-library/jest-dom"]
   },
-  "include": ["src/", "__tests__/", "./vitest-setup.ts"]
+  "include": ["src/", "__tests__/", "./vitest-setup.ts", "index.d.ts"]
 }
