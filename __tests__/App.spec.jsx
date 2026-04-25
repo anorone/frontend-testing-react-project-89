@@ -1,7 +1,7 @@
-import { render, screen, within } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import { screen, within } from '@testing-library/react'
 
 import App from '../src/App'
+import { setup } from '../utils'
 import steps from '../__fixtures__/steps.json'
 
 const groupTableRows = (rows) => rows.reduce((acc, row) => {
@@ -10,8 +10,7 @@ const groupTableRows = (rows) => rows.reduce((acc, row) => {
 }, {})
 
 test('widget integration', async () => {
-  const user = userEvent.setup()
-  render(<App steps={steps} />)
+  const { user } = setup(<App steps={steps} />)
   const chatButton = screen.getByRole('button', { name: 'Открыть Чат' })
   expect(chatButton).toBeVisible()
   await user.click(chatButton)
@@ -34,8 +33,7 @@ test('host application with an embedded chatbot widget', async () => {
     'Страна': 'Россия',
     'Принять правила': 'true'
   }
-  const user = userEvent.setup()
-  render(<App />)
+  const { user } = setup(<App />)
   await user.type(screen.getByLabelText('Email'), expected['Email'])
   await user.type(screen.getByLabelText('Пароль'), expected['Пароль'])
   await user.type(screen.getByLabelText('Адрес'), expected['Адрес'])

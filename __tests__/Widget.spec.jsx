@@ -1,18 +1,17 @@
-import { render, screen, within } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import { screen, within } from '@testing-library/react'
 
 import Widget from '@hexlet/chatbot-v2'
+import { setup } from '../utils'
 import steps from '../__fixtures__/steps.json'
 
 test('widget initialization', () => {
-  render(Widget(steps))
+  setup(Widget(steps))
   const chatButton = screen.getByRole('button', { name: 'Открыть Чат' })
   expect(chatButton).toBeInTheDocument()
 })
 
 it('opens and closes chatbot dialog', async () => {
-  const user = userEvent.setup()
-  render(Widget(steps))
+  const { user } = setup(Widget(steps))
   await user.click(screen.getByRole('button', { name: 'Открыть Чат' }))
   expect(screen.getByText('Виртуальный помощник')).toBeInTheDocument()
   await user.click(screen.getByRole('button', { name: 'Close' }))
@@ -20,8 +19,7 @@ it('opens and closes chatbot dialog', async () => {
 })
 
 test('moving through the chatbot steps', async () => {
-  const user = userEvent.setup()
-  render(Widget(steps))
+  const { user } = setup(Widget(steps))
   await user.click(screen.getByRole('button', { name: 'Открыть Чат' }))
   expect(screen.getByText('Начало')).toBeInTheDocument()
   await user.click(screen.getByRole('button', { name: 'Следующий шаг' }))
@@ -35,8 +33,7 @@ test('moving through the chatbot steps', async () => {
 })
 
 it('is empty if no steps are passed', async () => {
-  const user = userEvent.setup()
-  render(Widget([]))
+  const { user } = setup(Widget([]))
   await user.click(screen.getByRole('button', { name: 'Открыть Чат' }))
   const chatBot = screen.getByRole('dialog')
   expect(within(chatBot).queryAllByRole('paragraph')).toHaveLength(0)
@@ -44,5 +41,5 @@ it('is empty if no steps are passed', async () => {
 })
 
 it('throws a runtime error', () => {
-  expect(() => render(Widget())).toThrow()
+  expect(() => setup(Widget())).toThrow()
 })
