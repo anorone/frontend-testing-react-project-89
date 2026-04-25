@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
 import Widget from '@hexlet/chatbot-v2'
@@ -32,4 +32,17 @@ test('moving through the chatbot steps', async () => {
   await user.click(screen.getByRole('button', { name: 'Предыдущий шаг' }))
   await user.click(screen.getByRole('button', { name: 'В начало' }))
   expect(screen.getAllByText('Начало')).toHaveLength(2)
+})
+
+it('is empty if no steps are passed', async () => {
+  const user = userEvent.setup()
+  render(Widget([]))
+  await user.click(screen.getByRole('button', { name: 'Открыть Чат' }))
+  const chatBot = screen.getByRole('dialog')
+  expect(within(chatBot).queryAllByRole('paragraph')).toHaveLength(0)
+  expect(within(chatBot).queryAllByRole('button', { name: /^(?!close$)/i })).toHaveLength(0)
+})
+
+it('throws a runtime error', () => {
+  expect(() => render(Widget())).toThrow()
 })
