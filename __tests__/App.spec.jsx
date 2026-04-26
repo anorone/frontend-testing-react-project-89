@@ -1,6 +1,7 @@
 import { screen, within } from '@testing-library/react'
 
 import App from '../src/App'
+import { ChatBot } from '../models'
 import { setup } from '../utils'
 import steps from '../__fixtures__/steps.json'
 
@@ -9,18 +10,23 @@ const groupTableRows = (rows) => rows.reduce((acc, row) => {
   return { ...acc, [name.textContent]: value.textContent }
 }, {})
 
-test('widget integration', async () => {
-  const { user } = setup(<App steps={steps} />)
+it('displays the chat button', () => {
+  setup(<App steps={steps} />)
   const chatButton = screen.getByRole('button', { name: 'Открыть Чат' })
   expect(chatButton).toBeVisible()
-  await user.click(chatButton)
+})
+
+test('widget integration', async () => {
+  const widget = setup(<App steps={steps} />)
+  const chatBot = new ChatBot(widget)
+  await chatBot.open()
   expect(screen.getByText('Виртуальный помощник')).toBeVisible()
   expect(screen.getByText('Начало')).toBeVisible()
-  await user.click(screen.getByRole('button', { name: 'Следующий шаг' }))
+  await chatBot.step('Следующий шаг')
   expect(screen.getByText('Куда вы хотите перейти?')).toBeVisible()
-  await user.click(screen.getByRole('button', { name: 'В начало' }))
+  await chatBot.step('В начало')
   expect(screen.queryByRole('button', { name: 'В начало' })).not.toBeInTheDocument()
-  await user.click(screen.getByRole('button', { name: 'Close' }))
+  await chatBot.close()
   expect(screen.queryByText('Виртуальный помощник')).not.toBeInTheDocument()
 })
 
