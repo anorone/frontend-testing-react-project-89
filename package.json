@@ -9,6 +9,7 @@
     "lint": "eslint .",
     "test": "vitest run",
     "test:watch": "vitest",
+    "coverage": "vitest run --coverage",
     "preview": "vite preview",
     "vitest-preview": "vitest-preview"
   },
@@ -26,6 +27,7 @@
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.1.1",
+    "@vitest/coverage-v8": "^4.1.0",
     "eslint": "^9.39.1",
     "eslint-plugin-jest-dom": "^5.5.0",
     "eslint-plugin-react-hooks": "^7.0.1",
